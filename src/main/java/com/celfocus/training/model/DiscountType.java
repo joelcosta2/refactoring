@@ -7,6 +7,7 @@ public enum  DiscountType {
 
     private Discount discount;
 
+    @SuppressWarnings("unused")
     DiscountType(Discount discount){
         this.discount = discount;
     }

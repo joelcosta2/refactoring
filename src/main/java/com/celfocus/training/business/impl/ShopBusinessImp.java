@@ -13,7 +13,6 @@ import com.celfocus.training.model.User;
 import com.celfocus.training.util.Utils;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,7 +59,10 @@ public class ShopBusinessImp implements IShopBusiness {
         Discount discount = this.getDiscountForUser(user);
 
         ShopCartItem shopCartItem = new ShopCartItem(nextId, product, discount, START_QUANTITY);
-        userShoppingCartItemList.add(shopCartItem);
+
+        if (userShoppingCartItemList != null) {
+            userShoppingCartItemList.add(shopCartItem);
+        }
 
         this.shoppingCartUser.replace(user, userShoppingCartItemList);
 
@@ -119,14 +121,8 @@ public class ShopBusinessImp implements IShopBusiness {
             return false;
         }
 
-        boolean haveProduct = userShoppingCardList.stream()
+        return userShoppingCardList.stream()
                 .anyMatch(shopCartItem -> shopCartItem.getProduct().getProductName().equals(product.getProductName()));
-
-        if (haveProduct) {
-            return true;
-        }
-
-        return false;
     }
 
     private List<ShopCartItem> increaseProductQuantity(Product product, List<ShopCartItem> userShoppingCardList) {

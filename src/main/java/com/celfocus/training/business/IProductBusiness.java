@@ -1,7 +1,6 @@
 package com.celfocus.training.business;
 
 import com.celfocus.training.business.exception.DeleteException;
-import com.celfocus.training.business.exception.FindException;
 import com.celfocus.training.business.exception.SaveException;
 import com.celfocus.training.model.Product;
 
@@ -15,7 +14,7 @@ public interface IProductBusiness {
 
     void saveProduct(Product product) throws SaveException;
 
-    boolean updateProduct(Product userWithChange) throws FindException, SaveException;
+    boolean updateProduct(Product userWithChange);
 
     boolean deleteProduct(Product product) throws DeleteException;
 

@@ -35,7 +35,7 @@ public class UserBusinessImp extends AbstractOperations<User> implements IUserBu
     }
 
     @Override
-    public boolean updateUser(User userWithChange) throws FindException, SaveException {
+    public boolean updateUser(User userWithChange) throws FindException {
         if (!this.existingUsername(userWithChange.getUsername())) throw new FindException("Don´t exist the user.");
 
         User userFound = this.findUserByName(userWithChange.getUsername());

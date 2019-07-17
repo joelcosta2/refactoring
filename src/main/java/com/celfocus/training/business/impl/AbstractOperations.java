@@ -29,7 +29,7 @@ abstract class AbstractOperations<T> implements IOperations<T> {
     }
 
     @Override
-    public void update(int indexInList, T model) throws SaveException {
+    public void update(int indexInList, T model) {
         this.mapModel.set(indexInList, model);
     }
 

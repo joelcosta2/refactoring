@@ -1,4 +1,4 @@
-package com.celfocus.training.View;
+package com.celfocus.training.view;
 
 public enum  TypeFile {
     HTML,

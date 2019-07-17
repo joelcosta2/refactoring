@@ -1,8 +1,8 @@
 package com.celfocus.training;
 
-import com.celfocus.training.View.ViewProduct;
-import com.celfocus.training.View.ViewShopping;
-import com.celfocus.training.View.ViewUser;
+import com.celfocus.training.view.ViewProduct;
+import com.celfocus.training.view.ViewShopping;
+import com.celfocus.training.view.ViewUser;
 import com.celfocus.training.business.IProductBusiness;
 import com.celfocus.training.business.IShopBusiness;
 import com.celfocus.training.business.IUserBusiness;
@@ -33,7 +33,7 @@ public class Main {
         IUserController userController = new UserControllerImp(userBusiness);
         IShopController shopController = new ShopControllerImp(shopBusiness);
 
-        // Wire View
+        // Wire view
         ViewProduct viewProduct = new ViewProduct(productController);
         ViewUser viewUser = new ViewUser(userController);
         ViewShopping viewShopping = new ViewShopping(shopController);
@@ -41,9 +41,6 @@ public class Main {
         // Creating the products
         ProductDTO douroTravel = new ProductDTO("Douro Travel in boat.", 59.99);
         ProductDTO clerigosTower = new ProductDTO("Clérigos tower visit.", 12.00);
-
-        ProductDTO ribeiraTour = new ProductDTO("Ribeira tour.", 27.50);
-        ProductDTO seaLifeTour = new ProductDTO("SeaLife tour.", 32.00);
 
         viewProduct.saveProduct(douroTravel);
         viewProduct.saveProduct(clerigosTower);

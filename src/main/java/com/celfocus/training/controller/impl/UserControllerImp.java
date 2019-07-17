@@ -95,9 +95,6 @@ public class UserControllerImp implements IUserController {
     }
 
     private boolean isUserDTOFromViewNull(UserDTO userDTO) {
-        if (userDTO == null || userDTO.getUsername() == null) {
-            return true;
-        }
-        return false;
+        return userDTO == null || userDTO.getUsername() == null;
     }
 }

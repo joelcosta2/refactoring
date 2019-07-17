@@ -1,4 +1,4 @@
-package com.celfocus.training.View;
+package com.celfocus.training.view;
 
 import com.celfocus.training.business.exception.DeleteException;
 import com.celfocus.training.business.exception.FindException;
@@ -8,13 +8,19 @@ import com.celfocus.training.controller.dtos.UserDTO;
 import com.celfocus.training.util.Utils;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static com.celfocus.training.util.constant.ConstantNumbers.SIXTY_FIVE_YEAROLD;
 
 
 public class ViewUser {
 
+    public static final String SPAN = "<span>";
     private IUserController userController;
+
+
+    private static final Logger LOGGER = Logger.getLogger( "ViewUser" );
 
     public ViewUser(IUserController userController) {
         this.userController = userController;
@@ -55,20 +61,14 @@ public class ViewUser {
     public void printUsers(){
         List<UserDTO> userDTOList = userController.getAllUserDTO();
 
-        System.out.println();
-        System.out.println("All Users");
-        System.out.println("----------------");
+        LOGGER.log(Level.FINE ,"All Users");
+        LOGGER.log(Level.FINE ,"----------------");
 
         for (UserDTO userDTO : userDTOList) {
-            System.out.println(userDTO);
+            LOGGER.log(Level.FINE ,userDTO.toString());
         }
 
-        System.out.println("----------------");
-        System.out.println();
-    }
-
-    public String showUser(TypeFile typeFile, UserDTO userDTO) {
-        return "";
+        LOGGER.log(Level.FINE ,"----------------");
     }
 
     private String buildFileUserXml(UserDTO userDTO) {
@@ -89,9 +89,9 @@ public class ViewUser {
         stringBuilder
                 .append("<div>")
                 .append("<h1>User</h1>")
-                .append("<span>").append(userDTO.getUsername()).append("<span>")
-                .append("<span>").append(userDTO.getBirthDate().toString()).append("<span>")
-                .append("<span>").append(userDTO.isMajor()).append("<span>")
+                .append(SPAN).append(userDTO.getUsername()).append(SPAN)
+                .append(SPAN).append(userDTO.getBirthDate().toString()).append(SPAN)
+                .append(SPAN).append(userDTO.isMajor()).append(SPAN)
                 .append("</div>");
 
         return stringBuilder.toString();

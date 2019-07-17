@@ -1,4 +1,4 @@
-package com.celfocus.training.View;
+package com.celfocus.training.view;
 
 import com.celfocus.training.business.exception.BusinessException;
 import com.celfocus.training.controller.IShopController;
@@ -7,10 +7,14 @@ import com.celfocus.training.controller.dtos.ShopCartItemDTO;
 import com.celfocus.training.controller.dtos.UserDTO;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ViewShopping {
 
     private IShopController shopController;
+
+    private static final Logger LOGGER = Logger.getLogger( "ViewShopping" );
 
     public ViewShopping(IShopController shopController) {
         this.shopController = shopController;
@@ -20,17 +24,15 @@ public class ViewShopping {
         try {
             List<ShopCartItemDTO> shopCartItemDTOS = this.shopController.getUserShoppingCardList(userDTO);
 
-            System.out.println();
-            System.out.println("Shopping Cart");
-            System.out.println("Username: " + userDTO.getUsername());
-            System.out.println("----------------");
+            LOGGER.log(Level.FINE ,"Shopping Cart");
+            LOGGER.log(Level.FINE ,"Username: " + userDTO.getUsername());
+            LOGGER.log(Level.FINE ,"----------------");
 
             for (ShopCartItemDTO shopCartItemDTO : shopCartItemDTOS) {
-                System.out.println(shopCartItemDTO);
+                LOGGER.log(Level.FINE ,shopCartItemDTO.toString());
             }
 
-            System.out.println("----------------");
-            System.out.println();
+            LOGGER.log(Level.FINE ,"----------------");
 
         } catch (BusinessException e) {
             e.printStackTrace();

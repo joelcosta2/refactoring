@@ -2,7 +2,6 @@ package com.celfocus.training.controller.impl;
 
 import com.celfocus.training.business.IProductBusiness;
 import com.celfocus.training.business.exception.DeleteException;
-import com.celfocus.training.business.exception.FindException;
 import com.celfocus.training.business.exception.SaveException;
 import com.celfocus.training.controller.IProductController;
 import com.celfocus.training.controller.dtos.ProductDTO;
@@ -77,7 +76,7 @@ public class ProductControllerImp implements IProductController {
     }
 
     @Override
-    public boolean updateProduct(ProductDTO productDTOFromView) throws SaveException, FindException {
+    public boolean updateProduct(ProductDTO productDTOFromView) {
         if (isProductDTOFromViewNull(productDTOFromView)) return false;
 
         Product product = this.convertProductDtoToProduct(productDTOFromView);
@@ -86,10 +85,7 @@ public class ProductControllerImp implements IProductController {
     }
 
     private boolean isProductDTOFromViewNull(ProductDTO productDTOFromView) {
-        if (productDTOFromView == null || productDTOFromView.getProductName() == null) {
-            return true;
-        }
-        return false;
+        return productDTOFromView == null || productDTOFromView.getProductName() == null;
     }
 
     private Product convertProductDtoToProduct(ProductDTO productDTOFromView) {

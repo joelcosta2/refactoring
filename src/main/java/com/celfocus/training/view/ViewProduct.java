@@ -1,16 +1,20 @@
-package com.celfocus.training.View;
+package com.celfocus.training.view;
 
 import com.celfocus.training.business.exception.DeleteException;
-import com.celfocus.training.business.exception.FindException;
 import com.celfocus.training.business.exception.SaveException;
 import com.celfocus.training.controller.IProductController;
 import com.celfocus.training.controller.dtos.ProductDTO;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ViewProduct {
 
+    public static final String SPAN = "<span>";
     IProductController productController;
+
+    private static final Logger LOGGER = Logger.getLogger( "ViewProduct" );
 
     public ViewProduct(IProductController productController) {
         this.productController = productController;
@@ -29,20 +33,15 @@ public class ViewProduct {
     public void printProducts(){
         List<ProductDTO> allProductDTO = productController.getAllProductDTO();
 
-        System.out.println();
-        System.out.println("All Products");
-        System.out.println("----------------");
+        LOGGER.log(Level.FINE,"All Products");
+        LOGGER.log(Level.FINE,"----------------");
 
         for (ProductDTO productDTO : allProductDTO) {
-            System.out.println(productDTO);
+            LOGGER.log(Level.FINE ,productDTO.toString());
         }
 
-        System.out.println("----------------");
-        System.out.println();
-    }
+        LOGGER.log(Level.FINE ,"----------------");
 
-    public String showUser(TypeFile typeFile, ProductDTO productDTO) {
-        return "";
     }
 
     private String buildFileProductXml(ProductDTO productDTO) {
@@ -63,21 +62,11 @@ public class ViewProduct {
         stringBuilder
                 .append("<div>")
                 .append("<h1>Product</h1>")
-                .append("<span>").append(productDTO.getProductName()).append("<span>")
-                .append("<span>").append(productDTO.getAmount()).append("<span>")
+                .append(SPAN).append(productDTO.getProductName()).append(SPAN)
+                .append(SPAN).append(productDTO.getAmount()).append(SPAN)
                 .append("</div>");
 
         return stringBuilder.toString();
-    }
-
-    public void updateUser(ProductDTO productDTO) {
-        try {
-            productController.updateProduct(productDTO);
-        } catch (SaveException e) {
-            e.printStackTrace();
-        } catch (FindException e) {
-            e.printStackTrace();
-        }
     }
 
     public void deleteUser(ProductDTO productDTO) {

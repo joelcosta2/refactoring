@@ -2,7 +2,6 @@ package com.celfocus.training.business.impl;
 
 import com.celfocus.training.business.IProductBusiness;
 import com.celfocus.training.business.exception.DeleteException;
-import com.celfocus.training.business.exception.FindException;
 import com.celfocus.training.business.exception.SaveException;
 import com.celfocus.training.model.Product;
 
@@ -37,9 +36,7 @@ public class ProductBusinessImp extends AbstractOperations<Product> implements I
     }
 
     @Override
-    public boolean updateProduct(Product productWithChange) throws FindException, SaveException {
-        if (!this.existingProductName(productWithChange.getProductName())) throw new FindException("Don´t exist the product.");
-
+    public boolean updateProduct(Product productWithChange){
         Product productFound = this.findProductByName(productWithChange.getProductName());
         int productIndex = super.getIndex(productFound);
 
